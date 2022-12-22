@@ -1,8 +1,10 @@
 import app from './app';
+import { connectToDatabase, disconnectFromDatabase } from './utils/db';
 import logger from './utils/logger';
 const PORT = process.env.PORT || 4000;
 
 const server = app.listen(PORT, async () => {
+  await connectToDatabase();
   logger.info(`Server listening at http://localhost:${PORT}`);
 });
 
@@ -13,7 +15,7 @@ function gracefulShutdown(signal: string) {
     logger.info('Goodbye, got signal', signal);
     server.close();
     // disconnect from db
-    // await disconnectFromDatabase();
+    await disconnectFromDatabase();
     logger.info('My work here is done');
     process.exit(0);
   });

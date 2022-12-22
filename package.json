@@ -26,8 +26,10 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.15",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
     "http-status-codes": "^2.2.0",
