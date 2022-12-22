@@ -2,17 +2,18 @@
   "name": "computerized_transcript",
   "version": "1.0.0",
   "description": "A server application for generating stduent transcript result",
-  "main": "index.js",
+  "main": "server.js",
   "author": "ifenna-pascal <ifennamonanu70@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.js",
+    "dev": "ts-node-dev src/server.ts",
     "build": "rimraf ./dist tsc",
-    "start": "yarn run build && node dist/index.js",
+    "start": "yarn run build && node dist/server.js",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "devDependencies": {
+    "@types/helmet": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
@@ -24,11 +25,17 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "http-status-codes": "^2.2.0",
     "husky": "^8.0.2",
     "json-web-token": "^3.2.0",
     "mongoose": "^6.8.1",
+    "pino": "^8.8.0",
+    "pino-pretty": "^9.1.1",
     "rimraf": "^3.0.2",
     "ts-node-dev": "^2.0.0"
   },
