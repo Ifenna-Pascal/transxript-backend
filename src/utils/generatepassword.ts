@@ -1,6 +1,8 @@
-import { customAlphabet } from 'nanoid';
-
 export default async function () {
-  const password = customAlphabet('1234567890abcdefghijklmnopqrstuvwzyz', 6);
-  return await password();
+  const alphaNumeric = '1234567890abcdefghijklmnopqrstuvwzyz';
+  let password = '';
+  for (let i = 0; i <= 6; i++) {
+    password += alphaNumeric[Math.floor(Math.random() * alphaNumeric.length)];
+  }
+  return password;
 }

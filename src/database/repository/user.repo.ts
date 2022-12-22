@@ -23,7 +23,7 @@ async function createUser(user: Omit<User, 'comparePassword'>) {
 }
 
 const getUser = async (filter: object, option?: string) => {
-  const user = await userModel.findOne(filter).select('-password').populate('roleId', option).lean<User>().exec();
+  const user = await userModel.findOne(filter).select('-password').lean<User>().exec();
   return user;
 };
 

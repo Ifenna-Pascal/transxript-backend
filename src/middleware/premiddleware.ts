@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { CORS_ORIGIN } from '../constants';
+import deserializeUser from './deserialize_user';
 
 function PreMiddleware(app: express.Application) {
   app.use(express.json());
@@ -13,6 +14,7 @@ function PreMiddleware(app: express.Application) {
   );
 
   app.use(helmet());
+  app.use(deserializeUser);
 
   return app;
 }

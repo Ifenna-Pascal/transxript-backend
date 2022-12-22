@@ -1,7 +1,7 @@
 import { prop, pre, getModelForClass } from '@typegoose/typegoose';
 import argon2 from 'argon2';
 
-enum USERTYPE {
+export enum USERTYPE {
   ADMIN = 'admin',
   TEACHER = 'teacher',
 }
@@ -14,11 +14,11 @@ enum USERTYPE {
   }
 })
 export class User {
-  @prop({ required: true })
-  public firstname!: string;
+  @prop()
+  public firstname?: string;
 
-  @prop({ required: true })
-  public lastname!: string;
+  @prop()
+  public lastname?: string;
 
   @prop({
     unique: true,
@@ -31,11 +31,11 @@ export class User {
   })
   public email!: string;
 
-  @prop({ required: true, min: 6, max: 12 })
+  @prop({ required: true, min: 6, max: 12, select: false })
   public password!: string;
 
-  @prop({ enum: USERTYPE, default: USERTYPE.TEACHER, select: false })
-  public userType!: USERTYPE;
+  @prop({ enum: USERTYPE, default: USERTYPE.TEACHER })
+  public userType?: USERTYPE;
 
   @prop({ trim: true, lowercase: true })
   public academic_session?: string;
