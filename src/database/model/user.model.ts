@@ -20,11 +20,6 @@ export class User {
   @prop({ required: true })
   public lastname!: string;
 
-  @prop() // this will create a virtual property called 'fullName'
-  get fullName() {
-    return `${this.firstname} ${this.lastname}`;
-  }
-
   @prop({
     unique: true,
     validate: {
