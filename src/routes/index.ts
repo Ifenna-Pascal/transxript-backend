@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import logger from '../utils/logger';
 import { StatusCodes } from 'http-status-codes';
-import { adminRoute } from './routes.imports';
+import { authRoute } from './routes.imports';
 const router = Router();
 
 router.get('/ping_pong', (req: Request, res: Response) => {
@@ -10,6 +10,6 @@ router.get('/ping_pong', (req: Request, res: Response) => {
 });
 
 // all routes
-router.use('/admin', adminRoute.default);
+router.use('/auth', authRoute.default);
 
 export default router;

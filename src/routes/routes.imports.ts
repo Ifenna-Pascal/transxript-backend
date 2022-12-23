@@ -1,1 +1,1 @@
-export * as adminRoute from '../module/admin/admin.route';
+export * as authRoute from '../module/auth/auth.route';

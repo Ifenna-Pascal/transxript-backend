@@ -31,7 +31,7 @@ export class User {
   })
   public email!: string;
 
-  @prop({ required: true, min: 6, max: 12, select: false })
+  @prop({ required: true })
   public password!: string;
 
   @prop({ enum: USERTYPE, default: USERTYPE.TEACHER })
@@ -41,7 +41,7 @@ export class User {
   public academic_session?: string;
 
   public async comparePassword(password: string): Promise<boolean> {
-    return argon2.verify(this.password, password);
+    return await argon2.verify(this.password, password);
   }
 }
 
