@@ -5,7 +5,7 @@ import { AuthFailureError } from '../../core/ApiError';
 import generatepassword from '../../utils/generatepassword';
 import { SuccessResponse } from '../../core/ApiResponse';
 import { signJwt } from '../../utils/jwt';
-import { LoginBody, RegisterUserBody } from '../../module/auth/auth.schema';
+import { LoginBody, RegisterUserBody } from '../../schema_validation/auth.schema';
 import { sendRegistrationMail } from '../../services/mailer/functions';
 
 const registerUser = asyncHandler(async (req: Request<RegisterUserBody>, res: Response) => {

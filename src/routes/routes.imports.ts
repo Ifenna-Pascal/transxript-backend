@@ -1,1 +1,1 @@
-export * as authRoute from '../module/auth/auth.route';
+export * as authRoute from './auth.route';
