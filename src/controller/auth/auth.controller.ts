@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
 import { createUser, findUserByEmail } from '../../database/repository/user.repo';
 import { AuthFailureError } from '../../core/ApiError';
-import generatepassword from '../../utils/generatepassword';
+import { generatepassword } from '../../utils/randoms';
 import { SuccessResponse } from '../../core/ApiResponse';
 import { signJwt } from '../../utils/jwt';
 import { LoginBody, RegisterUserBody } from '../../schema_validation/auth.schema';
@@ -12,7 +12,7 @@ const registerUser = asyncHandler(async (req: Request<RegisterUserBody>, res: Re
   const { firstname, lastname, email, session, password, userType } = req.body;
   const user = await findUserByEmail(email);
   if (user) throw new AuthFailureError('User with email already exists');
-  const passwords = password ? password : ((await generatepassword()) as string);
+  const passwords = password ? password : await generatepassword();
   const newUser = await createUser({
     firstname,
     lastname,

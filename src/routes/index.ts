@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import logger from '../utils/logger';
 import { StatusCodes } from 'http-status-codes';
-import { authRoute } from './routes.imports';
+import { authRoute, studentRoute } from './routes.imports';
 const router = Router();
 
 router.get('/ping_pong', (req: Request, res: Response) => {
@@ -11,5 +11,6 @@ router.get('/ping_pong', (req: Request, res: Response) => {
 
 // all routes
 router.use('/auth', authRoute.default);
+router.use('/student', studentRoute.default);
 
 export default router;

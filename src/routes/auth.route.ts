@@ -1,6 +1,5 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { processRequestBody } from 'zod-express-middleware';
-import isadmin from '../middleware/isAdmin';
 import isAuth from '../middleware/isAuth';
 import { loginUser, registerUser } from '../controller/auth/auth.controller';
 import { loginSchema, registerUserSchema } from '../schema_validation/auth.schema';
