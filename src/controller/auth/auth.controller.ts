@@ -5,7 +5,8 @@ import { AuthFailureError } from '../../core/ApiError';
 import generatepassword from '../../utils/generatepassword';
 import { SuccessResponse } from '../../core/ApiResponse';
 import { signJwt } from '../../utils/jwt';
-import { LoginBody, RegisterUserBody } from './auth.schema';
+import { LoginBody, RegisterUserBody } from '../../module/auth/auth.schema';
+import { sendRegistrationMail } from '../../services/mailer/functions';
 
 const registerUser = asyncHandler(async (req: Request<RegisterUserBody>, res: Response) => {
   const { firstname, lastname, email, session, password, userType } = req.body;
@@ -21,6 +22,9 @@ const registerUser = asyncHandler(async (req: Request<RegisterUserBody>, res: Re
     academic_session: session,
   });
   const token = await signJwt({ id: newUser?._id });
+  const details = { to: email, password: passwords, fullname: `${firstname} + ${lastname}` };
+  const result = await sendRegistrationMail(details);
+  if (!result) throw new AuthFailureError('email not send, validation error');
   new SuccessResponse('user created successfully', { user: newUser, token: token }).send(res);
 });
 
@@ -32,7 +36,7 @@ const loginUser = asyncHandler(async (req: Request<LoginBody>, res: Response) =>
   if (!(await user.comparePassword(password))) throw new AuthFailureError('password mismatch');
   console.log(await user.comparePassword(password));
   const token = await signJwt({ id: user?._id });
-  new SuccessResponse('user created successfully', { user: user, token: token }).send(res);
+  new SuccessResponse('user logged in successfully', { user: user, token: token }).send(res);
 });
 
 export { registerUser, loginUser };

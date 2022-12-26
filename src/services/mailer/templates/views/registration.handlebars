@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body: {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%; background-color: #eee;">
+        <div style="max-width: 500px; margin: 0 auto; background-color: #fff">
+            {{>header}}
+            <div style="border-top: 1px solid #049869; padding:15px 15px 0; margin: 0; display: block">
+                <p style="margin:0; font-size: 1.6rem; font-weight: bolder; text-align: left;">
+                    {{ title }}
+                </p>
+            </div>
+            <div style="padding: 12px 15px 10px; border-bottom: 1px solid #049869">
+                <p style="margin:0;">
+                   Hy {{fullname}},  your login details
+                </p>
+                <p style="font-weight: bolder; margin-bottom: 5px;">
+                    Verification code:
+                </p>
+                <p style="margin:0; font-size: 1.3rem; font-weight: bolder; color: #049869;">
+                    {{password}}
+                </p>
+                
+            </div>
+            {{>footer}}
+        </div>
+    </div>
+</body>
+</html>
