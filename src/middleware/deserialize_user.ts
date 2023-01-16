@@ -3,7 +3,7 @@ import { verifyJwt } from '../utils/jwt';
 
 function deserializeUser(req: Request, res: Response, next: NextFunction) {
   try {
-    const accessToken = (req.headers.authorization || '').replace(/^Bearer\s/, '');
+    const accessToken = req.headers.authorization?.split(' ')[1] || '';
 
     if (!accessToken) return next();
 

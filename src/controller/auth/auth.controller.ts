@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { Request, Response } from 'express';
-import { createUser, findUserByEmail } from '../../database/repository/user.repo';
+import { createUser, findUserByEmail, findUserById } from '../../database/repository/user.repo';
 import { AuthFailureError } from '../../core/ApiError';
 import { generatepassword } from '../../utils/randoms';
 import { SuccessResponse } from '../../core/ApiResponse';
@@ -22,6 +22,7 @@ const registerUser = asyncHandler(async (req: Request<RegisterUserBody>, res: Re
     academic_session: session,
   });
   const token = await signJwt({ id: newUser?._id });
+  console.log(token, 'token');
   const details = { to: email, password: passwords, fullname: `${firstname} + ${lastname}` };
   const result = await sendRegistrationMail(details);
   if (!result) throw new AuthFailureError('email not send, validation error');
@@ -34,9 +35,16 @@ const loginUser = asyncHandler(async (req: Request<LoginBody>, res: Response) =>
   const user = await findUserByEmail(email);
   if (!user) throw new AuthFailureError('user not found');
   if (!(await user.comparePassword(password))) throw new AuthFailureError('password mismatch');
-  console.log(await user.comparePassword(password));
   const token = await signJwt({ id: user?._id });
+  console.log(token, 'token');
   new SuccessResponse('user logged in successfully', { user: user, token: token }).send(res);
 });
 
-export { registerUser, loginUser };
+const userProfile = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = res.locals.user;
+  const user = await findUserById(id);
+  if (!user) throw new AuthFailureError('user not found');
+  new SuccessResponse('user logged in successfully', { user }).send(res);
+});
+
+export { registerUser, loginUser, userProfile };

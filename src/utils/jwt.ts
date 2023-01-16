@@ -3,9 +3,7 @@ import { JWT_SECRET } from '../constants';
 import { BadTokenError } from '../core/ApiError';
 
 async function signJwt(payload: string | Buffer | object) {
-  return Jwt.sign(payload, JWT_SECRET, {
-    expiresIn: '7d',
-  });
+  return Jwt.sign(payload, JWT_SECRET);
 }
 
 function verifyJwt(token: string) {

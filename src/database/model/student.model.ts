@@ -1,4 +1,4 @@
-import { prop, pre, getModelForClass } from '@typegoose/typegoose';
+import { prop, getModelForClass } from '@typegoose/typegoose';
 
 export enum USERTYPE {
   ADMIN = 'admin',
