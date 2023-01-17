@@ -22,6 +22,9 @@ export class Result {
 
   @prop({ required: true })
   public grade!: string;
+
+  @prop({ required: true })
+  public total!: string;
 }
 
 export const ResultModel = getModelForClass(Result, {

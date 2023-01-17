@@ -5,13 +5,11 @@ import { createResult, findResult } from '../../database/repository/result.repo,
 import { NotFoundError } from '../../core/ApiError';
 import { ResultBody } from '../../schema_validation/result.schema';
 
-const addResult = asyncHandler(async (req: Request<ResultBody>, res: Response) => {
+const addResult = asyncHandler(async (req: Request<any>, res: Response) => {
   const data = req.body;
-  const new_result = await createResult(data);
-  if (!new_result) {
-    throw new NotFoundError('result not created');
-  }
-  new SuccessResponse('result created successfully', { user: new_result }).send(res);
+  const docs = await Promise.all(data.map((x: any) => createResult(x)));
+  if (!docs) throw new NotFoundError('result not created');
+  new SuccessResponse('result created successfully', { result: docs }).send(res);
 });
 
 const findResults = asyncHandler(async (req: Request, res: Response) => {
