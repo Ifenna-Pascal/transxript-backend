@@ -1,4 +1,4 @@
-import { createStudent } from '../../database/repository/student.repo';
+import { createStudent, findStudentByReqNo } from '../../database/repository/student.repo';
 import { Request, Response } from 'express';
 import { SuccessResponse } from '../../core/ApiResponse';
 import asyncHandler from 'express-async-handler';
@@ -22,10 +22,16 @@ const addStudent = asyncHandler(async (req: Request<studentBody>, res: Response)
 const getStudentBySession = asyncHandler(async (req: Request, res: Response) => {
   const { id } = res.locals.user;
   const user = await findUserById(id);
-  console.log(user?.academic_session);
   const students = await findBySession(user?.academic_session as string);
   if (!students) throw new NotFoundError('students not found');
   new SuccessResponse('student created successfully', { students: students }).send(res);
 });
 
-export { addStudent, getStudentBySession };
+const studentProfile = asyncHandler(async (req: Request, res: Response) => {
+  const { regNumber } = req.body;
+  const student = await findStudentByReqNo(regNumber);
+  if (!student) throw new NotFoundError('students not found');
+  new SuccessResponse('student created successfully', { students: student }).send(res);
+});
+
+export { addStudent, getStudentBySession, studentProfile };

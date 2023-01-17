@@ -14,4 +14,13 @@ export const addStudentSchema = {
   }),
 };
 
+export const profileSchema = {
+  body: object({
+    regNumber: string({
+      required_error: 'regNumber is required',
+    }),
+  }),
+};
+
 export type studentBody = TypeOf<typeof addStudentSchema.body>;
+export type studentProfile = TypeOf<typeof profileSchema.body>;

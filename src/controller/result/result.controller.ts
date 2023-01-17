@@ -13,8 +13,8 @@ const addResult = asyncHandler(async (req: Request<any>, res: Response) => {
 });
 
 const findResults = asyncHandler(async (req: Request, res: Response) => {
-  const data = req.body;
-  const results = await findResult(data);
+  const data = req.params?.id;
+  const results = await findResult({ studentId: data });
   new SuccessResponse('result parsed successfully', { result: results }).send(res);
 });
 

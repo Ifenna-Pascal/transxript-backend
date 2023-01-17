@@ -18,10 +18,8 @@ export const ResultSchema = {
 export const getResult = {
   body: object({
     studentId: string({ required_error: 'student id is required' }),
-    level: string({ required_error: 'level is required' }),
-    semester: string({ required_error: 'semester is required' }),
   }),
 };
 
 export type ResultBody = TypeOf<typeof ResultSchema.body>;
-export type GetResultBody = TypeOf<typeof ResultSchema.body>;
+export type GetResultBody = TypeOf<typeof getResult.body>;
