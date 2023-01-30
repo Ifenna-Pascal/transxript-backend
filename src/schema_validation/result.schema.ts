@@ -3,7 +3,7 @@ import { array, number, object, string, TypeOf } from 'zod';
 export const ResultSchema = {
   body: array(
     object({
-      session: string({ required_error: 'session feild is required' }),
+      session: string({ required_error: 'sessions feild is required' }),
       total: string({ required_error: 'total is required' }),
       regNo: string({ required_error: 'registration number is required' }),
       level: string({ required_error: 'level is required' }),
