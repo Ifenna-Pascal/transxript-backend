@@ -7,7 +7,7 @@ async function generatepassword() {
   return password;
 }
 
-async function generateRegNumber(session: string): Promise<string> {
+function generateRegNumber(session: string): string {
   const number = '1234567890';
   let regNumber = '';
   for (let i = 0; i <= 9; i++) {

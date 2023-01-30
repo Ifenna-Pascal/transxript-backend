@@ -8,7 +8,7 @@ export const registerUserSchema = {
     lastname: string({
       required_error: 'lastname is required',
     }),
-    session: string({
+    academic_session: string({
       required_error: 'academic session is required',
     }),
     userType: string().optional(),

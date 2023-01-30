@@ -5,7 +5,7 @@ const createResult = (new_result: Result) => {
 };
 
 const findResult = (filter: object) => {
-  return ResultModel.find(filter).populate('studentId').lean<Result>().exec();
+  return ResultModel.find(filter).lean<Result>().exec();
 };
 
 export { createResult, findResult };

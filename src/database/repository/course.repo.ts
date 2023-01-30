@@ -7,3 +7,7 @@ export const findCourses = (filter: object) => {
 export const findCourseById = (courseId: string) => {
   return courseModel.findById(courseId).lean<Course>().exec();
 };
+
+export async function createCourse(course: Course) {
+  return courseModel.create(course);
+}

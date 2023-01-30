@@ -7,15 +7,24 @@ import { ResultBody } from '../../schema_validation/result.schema';
 
 const addResult = asyncHandler(async (req: Request<any>, res: Response) => {
   const data = req.body;
+
   const docs = await Promise.all(data.map((x: any) => createResult(x)));
+  console.log(docs);
+
   if (!docs) throw new NotFoundError('result not created');
   new SuccessResponse('result created successfully', { result: docs }).send(res);
 });
 
 const findResults = asyncHandler(async (req: Request, res: Response) => {
-  const data = req.params?.id;
-  const results = await findResult({ studentId: data });
+  const data = req.params?.regNo;
+  const results = await findResult({ regNo: data });
   new SuccessResponse('result parsed successfully', { result: results }).send(res);
 });
 
-export { addResult, findResults };
+const allResults = asyncHandler(async (req: Request, res: Response) => {
+  const results = await findResult(req.body);
+  if (!results) throw new NotFoundError('results not found');
+  new SuccessResponse('results found', { results: results }).send(res);
+});
+
+export { addResult, findResults, allResults };

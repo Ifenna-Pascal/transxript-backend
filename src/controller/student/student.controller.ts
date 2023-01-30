@@ -8,15 +8,20 @@ import { studentBody } from '../../schema_validation/student.schema';
 import { findUserById } from '../../database/repository/user.repo';
 import { findBySession } from '../../database/repository/student.repo';
 
-const addStudent = asyncHandler(async (req: Request<studentBody>, res: Response) => {
-  const { firstname, lastname, session } = req.body;
-  const newStudent = await createStudent({
-    firstname,
-    lastname,
-    regNumber: await generateRegNumber(session),
-    academic_session: session,
-  });
-  new SuccessResponse('student created successfully', { user: newStudent }).send(res);
+const addStudent = asyncHandler(async (req: Request, res: Response) => {
+  const data = req.body;
+  const docs = await Promise.all(
+    data.map((x: any) => {
+      const { firstname, lastname, academic_session, regNumber } = x;
+      createStudent({
+        firstname,
+        lastname,
+        regNumber,
+        academic_session,
+      });
+    }),
+  );
+  new SuccessResponse('student created successfully', { students: docs }).send(res);
 });
 
 const getStudentBySession = asyncHandler(async (req: Request, res: Response) => {
