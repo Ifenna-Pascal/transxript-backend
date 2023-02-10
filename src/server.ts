@@ -1,6 +1,6 @@
-import app from './src/app';
-import { connectToDatabase, disconnectFromDatabase } from './src/utils/db';
-import logger from './src/utils/logger';
+import app from './app';
+import { connectToDatabase, disconnectFromDatabase } from './utils/db';
+import logger from './utils/logger';
 const PORT = process.env.PORT || 4000;
 
 const server = app.listen(PORT, async () => {
