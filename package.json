@@ -6,7 +6,7 @@
   "author": "ifenna-pascal <ifennamonanu70@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev ./server.ts",
     "build": "rimraf ./dist tsc",
     "start": "yarn run build && node dist/server.js",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
