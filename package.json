@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "rimraf ./dist tsc",
-    "start": "yarn run build && node dist/src/server.js",
+    "start": "yarn run build && node /src/server.js",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
