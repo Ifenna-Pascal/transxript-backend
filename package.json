@@ -2,13 +2,13 @@
   "name": "computerized_transcript",
   "version": "1.0.0",
   "description": "A server application for generating stduent transcript result",
-  "main": "server.js",
+  "main": "src/server.ts",
   "author": "ifenna-pascal <ifennamonanu70@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev ./server.ts",
+    "dev": "ts-node-dev src/server.ts",
     "build": "rimraf ./dist tsc",
-    "start": "yarn run build && node dist/server.js",
+    "start": "yarn run build && node dist/src/server.js",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
