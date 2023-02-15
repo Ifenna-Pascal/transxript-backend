@@ -6,7 +6,12 @@ import deserializeUser from './deserialize_user';
 
 function PreMiddleware(app: express.Application) {
   app.use(express.json());
-  app.use(cors());
+  app.use(
+    cors({
+      origin: CORS_ORIGIN,
+      credentials: true,
+    }),
+  );
 
   app.use(helmet());
   app.use(deserializeUser);
